@@ -1,0 +1,16 @@
+.checkbox {
+  width: 25px;
+  height: 25px;
+  border-radius: 6px;
+  border: 0px;
+  color: white;
+  cursor: pointer;
+}
+
+.not_check {
+  background-color: #e0cad6;
+}
+
+.check {
+  background-color: #c94288;
+}

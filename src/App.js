@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Header from "./component/header"
+import Footer from "./component/Footer"
+import Clock from "./component/Clock";
+import TodoForm from "./component/TodoForm";
+import TodoList from "./component/TodoList";
+import { item1, item2, item3 } from "./fixtures/item_fixtures";
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+
+  useEffect(() => {
+    setTodoList([item1, item2, item3]);
+  }, []);
+
+  const handleAddItem = (newItem) => {
+    setTodoList([...todoList, newItem]);
+  };
+
+  const handleDrop = (reorderedList) => {
+    setTodoList(reorderedList);
+  };
+
+  const handleDelete = (id) => {
+    const newList = [...todoList];
+    newList.splice(id, 1);
+    setTodoList(newList);
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/> 
+      <Clock/>
+      <TodoForm onAddItem={handleAddItem}/>
+      <TodoList list={todoList} onDrop={handleDrop} onDelete={handleDelete} />
+      <Footer/>
     </div>
   );
 }
